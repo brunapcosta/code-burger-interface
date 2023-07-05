@@ -1,6 +1,6 @@
 import React from 'react'
 import { useForm } from "react-hook-form"
-import { toast } from 'react-toastify'
+import { toast, ToastContainer } from 'react-toastify'
 
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from "yup"
@@ -43,6 +43,10 @@ function Login() {
       password: client.password
     })
 
+    console.log(response)
+  }
+
+  const notify = () => {
     toast.error('Ocorreu um erro', {
       position: "top-right",
       autoClose: 5000,
@@ -53,8 +57,6 @@ function Login() {
       progress: undefined,
       theme: "colored",
     })
-
-    console.log(response)
   }
 
   return (
@@ -80,7 +82,8 @@ function Login() {
             error={errors.password?.message} />
           <ErrorMessage>{errors.password?.message}</ErrorMessage>
 
-          <Button onClick={onSubmit} type="submit" style={{ marginTop: 80, marginBottom: 25 }} >Entrar</Button>
+          <Button onClick={onSubmit} closeOnClick={notify} type="submit" style={{ marginTop: 80, marginBottom: 25 }} >Entrar</Button>
+          <ToastContainer autoClose={2000} />
         </form>
 
         <SingInLink>Não tem conta? <a>Cadastre-se</a></SingInLink>
