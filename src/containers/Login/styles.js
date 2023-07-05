@@ -11,9 +11,9 @@ export const Container = styled.div`
     align-items: center;
 `
 
-
 export const LoginImage = styled.img`
     height: 90%;
+    width: 40%;
 `
 
 export const ContainerItems = styled.div`

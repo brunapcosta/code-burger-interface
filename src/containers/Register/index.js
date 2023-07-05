@@ -1,5 +1,6 @@
 import React from 'react'
 import { useForm } from "react-hook-form"
+import { toast } from 'react-toastify'
 
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from "yup"
@@ -27,9 +28,8 @@ function Register() {
     password: Yup.string()
       .required("A senha é obrigatória")
       .min(6, "A senha deve ter pelo menos 6 digítos"),
-      confirmPassword: Yup.string("Confirmação de senha obrigatória")
-      .required("As senhas não conferem")
-      .min(6, "A senha deve ter pelo menos 6 digítos")
+    confirmPassword: Yup.string()
+      .required("Confirmação de senha obrigatória").oneOf([Yup.ref('password')], "As senhas não conferem")
   })
 
   const {
@@ -47,6 +47,16 @@ function Register() {
       password: client.password
     })
 
+    toast.error('Ocorreu um erro', {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    })
     console.log(response)
   }
 
@@ -58,7 +68,7 @@ function Register() {
         <h1>Cadastre-se</h1>
 
         <form noValidate onSubmit={handleSubmit(onSubmit)}>
-        <Label>Nome</Label>
+          <Label>Nome</Label>
           <Input
             type='text'
             {...register("name")}
@@ -89,7 +99,7 @@ function Register() {
 
           <ErrorMessage>{errors.confirmPassword?.message}</ErrorMessage>
 
-          <Button type="submit" style={{ marginTop: 40, marginBottom: 25 }} >Cadastrar</Button>
+          <Button type="submit" style={{ marginTop: 25, marginBottom: 25 }} >Cadastrar</Button>
         </form>
 
         <SingInLink>Já tem conta? <a>Faça Login</a></SingInLink>

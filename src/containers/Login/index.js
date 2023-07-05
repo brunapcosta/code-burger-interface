@@ -1,10 +1,11 @@
 import React from 'react'
 import { useForm } from "react-hook-form"
+import { toast } from 'react-toastify'
 
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from "yup"
 
-import LoginImg from '../../assets/image-login.png'
+import LoginImg from '../../assets/burguer-porcao-aipim.png'
 import Logo from '../../assets/logo.png'
 import Button from '../../Components/Button'
 import apiCodeBurger from '../../services/api'
@@ -42,6 +43,17 @@ function Login() {
       password: client.password
     })
 
+    toast.error('Ocorreu um erro', {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    })
+
     console.log(response)
   }
 
@@ -68,12 +80,11 @@ function Login() {
             error={errors.password?.message} />
           <ErrorMessage>{errors.password?.message}</ErrorMessage>
 
-          <Button type="submit" style={{ marginTop: 80, marginBottom: 25 }} >Entrar</Button>
+          <Button onClick={onSubmit} type="submit" style={{ marginTop: 80, marginBottom: 25 }} >Entrar</Button>
         </form>
 
         <SingInLink>Não tem conta? <a>Cadastre-se</a></SingInLink>
       </ContainerItems>
-
     </Container>
   )
 }
