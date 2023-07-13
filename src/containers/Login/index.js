@@ -1,6 +1,6 @@
 import React from 'react'
 import { useForm } from "react-hook-form"
-import { toast, ToastContainer } from 'react-toastify'
+import { toast } from 'react-toastify'
 
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from "yup"
@@ -38,16 +38,21 @@ function Login() {
   })
 
   const onSubmit = async client => {
-    const response = await apiCodeBurger.post('sessions', {
+    const response = await toast.promise(
+      apiCodeBurger.post('sessions', {
       email: client.email,
       password: client.password
+    }), {
+        pending: 'Verificando seus dados',
+        succes: 'Seja bem vindo',
+        error: 'Ocorreu um erro'
     })
 
     console.log(response)
   }
 
   const notify = () => {
-    toast.error('Ocorreu um erro', {
+    toast.error('Ocorreu um erro!', {
       position: "top-right",
       autoClose: 5000,
       hideProgressBar: false,
@@ -83,7 +88,6 @@ function Login() {
           <ErrorMessage>{errors.password?.message}</ErrorMessage>
 
           <Button onClick={onSubmit} closeOnClick={notify} type="submit" style={{ marginTop: 80, marginBottom: 25 }} >Entrar</Button>
-          <ToastContainer autoClose={2000} />
         </form>
 
         <SingInLink>Não tem conta? <a>Cadastre-se</a></SingInLink>

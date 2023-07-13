@@ -1,6 +1,5 @@
 import React from 'react'
 import { useForm } from "react-hook-form"
-import { toast } from 'react-toastify'
 
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from "yup"
@@ -47,16 +46,6 @@ function Register() {
       password: client.password
     })
 
-    toast.error('Ocorreu um erro', {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-    })
     console.log(response)
   }
 
