@@ -22,7 +22,7 @@ import {
 function Login() {
 
   const schema = Yup.object().shape({
-    email: Yup.string().email("Email  inválido")
+    email: Yup.string().email("Email inválido")
       .required("O campo de email é obrigatório"),
     password: Yup.string("Senha inválida")
       .required("A senha é obrigatória")
@@ -37,17 +37,16 @@ function Login() {
     resolver: yupResolver(schema)
   })
 
-  const onSubmit = async client => {
+  const onSubmit = async clientData => {
     const response = await toast.promise(
       apiCodeBurger.post('sessions', {
-      email: client.email,
-      password: client.password
-    }), {
-        pending: 'Verificando seus dados',
-        succes: 'Seja bem vindo',
-        error: 'Ocorreu um erro'
+        email: clientData.email,
+        password: clientData.password
+      }), {
+      pending: 'Verificando seus dados',
+      success: 'Seja bem vindo',
+      error: 'Ocorreu um erro'
     })
-
     console.log(response)
   }
 
