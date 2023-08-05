@@ -1,5 +1,6 @@
 import React from 'react'
 import { useForm } from "react-hook-form"
+import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -8,6 +9,7 @@ import * as Yup from "yup"
 import LoginImg from '../../assets/burguer-porcao-aipim.png'
 import Logo from '../../assets/logo.png'
 import Button from '../../Components/Button'
+import { useUser } from '../../hooks/UserContext'
 import apiCodeBurger from '../../services/api'
 import {
   Container,
@@ -20,6 +22,7 @@ import {
 } from './styles'
 
 function Login() {
+  const { putUserData } = useUser()
 
   const schema = Yup.object().shape({
     email: Yup.string().email("Email inválido")
@@ -38,7 +41,7 @@ function Login() {
   })
 
   const onSubmit = async clientData => {
-    const response = await toast.promise(
+    const { data } = await toast.promise(
       apiCodeBurger.post('sessions', {
         email: clientData.email,
         password: clientData.password
@@ -47,20 +50,8 @@ function Login() {
       success: 'Seja bem vindo',
       error: 'Ocorreu um erro'
     })
-    console.log(response)
-  }
 
-  const notify = () => {
-    toast.error('Ocorreu um erro!', {
-      position: "top-right",
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-    })
+    putUserData(data)
   }
 
   return (
@@ -86,10 +77,15 @@ function Login() {
             error={errors.password?.message} />
           <ErrorMessage>{errors.password?.message}</ErrorMessage>
 
-          <Button onClick={onSubmit} closeOnClick={notify} type="submit" style={{ marginTop: 80, marginBottom: 25 }} >Entrar</Button>
+          <Button type="submit" style={{ marginTop: 80, marginBottom: 25 }} >Entrar</Button>
         </form>
 
-        <SingInLink>Não tem conta? <a>Cadastre-se</a></SingInLink>
+        <SingInLink>
+          Não tem conta?{' '}
+          <Link style={{ color: 'white' }} to="/register" >
+            Cadastre-se
+          </Link>
+        </SingInLink>
       </ContainerItems>
     </Container>
   )

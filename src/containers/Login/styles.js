@@ -68,7 +68,7 @@ export const SingInLink = styled.p`
     line-height: 16px;
     color: #FFFFFF;
 
-    a{
+    Link{
         cursor: pointer;
         text-decoration: underline;
     }
