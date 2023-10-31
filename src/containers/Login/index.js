@@ -1,6 +1,6 @@
 import React from 'react'
 import { useForm } from "react-hook-form"
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -8,7 +8,7 @@ import * as Yup from "yup"
 
 import LoginImg from '../../assets/burguer-porcao-aipim.png'
 import Logo from '../../assets/logo.png'
-import Button from '../../Components/Button'
+import {Button} from '../../Components'
 import { useUser } from '../../hooks/UserContext'
 import apiCodeBurger from '../../services/api'
 import {
@@ -18,10 +18,11 @@ import {
   Label,
   Input,
   SingInLink,
-  ErrorMessage
+  ErrorMessage,
 } from './styles'
 
-function Login() {
+export function Login() {
+  const navigate = useNavigate()
   const { putUserData } = useUser()
 
   const schema = Yup.object().shape({
@@ -52,6 +53,10 @@ function Login() {
     })
 
     putUserData(data)
+
+    setTimeout(() => {
+      navigate('/')
+    }, 1000);
   }
 
   return (
@@ -77,7 +82,7 @@ function Login() {
             error={errors.password?.message} />
           <ErrorMessage>{errors.password?.message}</ErrorMessage>
 
-          <Button type="submit" style={{ marginTop: 80, marginBottom: 25 }} >Entrar</Button>
+          <Button type="submit" to="/" style={{ marginTop: 80, marginBottom: 25 }} >Entrar</Button>
         </form>
 
         <SingInLink>
@@ -90,5 +95,3 @@ function Login() {
     </Container>
   )
 }
-
-export default Login
