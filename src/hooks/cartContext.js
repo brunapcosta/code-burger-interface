@@ -7,10 +7,15 @@ const CartContext = createContext({})
 export const CartProvider = ({ children }) => {
     const [cartProducts, setCartProducts] = useState([])
 
+    const updateLocalStorage = async products => {
+        await localStorage.setItem('codeburger:cartInfo', JSON.stringify(products))
+    }
+
     const putProductInCart = async product => {
         const cartIndex = cartProducts.findIndex(pd => pd.id === product.id)
 
         let newCartProducts = []
+
         if (cartIndex >= 0) {
             newCartProducts = cartProducts
 
@@ -24,11 +29,47 @@ export const CartProvider = ({ children }) => {
             setCartProducts(newCartProducts)
         }
 
-        await localStorage.setItem('codeburger:cartInfo', JSON.stringify(newCartProducts))
+        await updateLocalStorage(newCartProducts)
     }
 
+    const deleteProducts = async productId => {
+        const newCart = cartProducts.filter(product => product.id !== productId)
 
+        setCartProducts(newCart)
+
+        await updateLocalStorage(newCart)
+    }
+
+    const increaseProducts = async productId => {
+        const newCart = cartProducts.map(product => {
+            return product.id === productId 
+            ? { ...product, quantity: product.quantity + 1 } 
+            : product 
+        })
+
+        setCartProducts(newCart)
+
+        await updateLocalStorage(newCart)
+
+    }
     
+    const decreaseProducts = async productId => {
+        const cartIndex = cartProducts.findIndex(pd => pd.id === productId)
+
+        if(cartProducts[cartIndex].quantity > 1){        
+        const newCart = cartProducts.map(product => {
+            return product.id === productId 
+            ? { ...product, quantity: product.quantity - 1 } 
+            : product
+        })
+
+        setCartProducts(newCart)
+
+        await updateLocalStorage(newCart)
+        } else{
+            deleteProducts(productId)
+        }
+    }
 
     useEffect(() => {
         const loadUserData = async () => {
@@ -40,10 +81,10 @@ export const CartProvider = ({ children }) => {
         }
 
         loadUserData()
-    })
+    }, [])
 
     return (
-        <CartContext.Provider value={{ putProductInCart, cartProducts }}>
+        <CartContext.Provider value={{ putProductInCart, cartProducts, increaseProducts, decreaseProducts }}>
             {children}
         </CartContext.Provider>
     )

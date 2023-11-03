@@ -5,12 +5,12 @@ import formatCurrency from '../../utils/formatCurrency'
 import {
   Container,
   Header,
-  Body
-  // EmptyCart
+  Body,
+  EmptyCart
 } from './styles'
 
 export function CartItems() {
-  const {cartProducts} = useCart()
+  const {cartProducts, increaseProducts, decreaseProducts} = useCart()
   console.log(cartProducts)
   return (
     <Container>
@@ -22,18 +22,24 @@ export function CartItems() {
         <p>Total</p>
       </Header>
 
-    {cartProducts && cartProducts.map(product => (
+    {cartProducts && cartProducts.length > 0 ? (
+      cartProducts.map(product => (
        <Body key={product.id}>
         <img src={product.url} />
         <p>{product.name}</p>
         <p>{formatCurrency(product.price)}</p>
-
-        <p>{product.quantity}</p>
-
-       
+        <div className='quantity-container'>
+          <button onClick={() => decreaseProducts(product.id)}>-</button>
+          <p>{product.quantity}</p>
+          <button onClick={() => increaseProducts(product.id)}>+</button>
+        </div>
         <p>{formatCurrency(product.quantity * product.price)}</p>
        </Body>
-    ))}
+    ))
+  ) : (
+    <EmptyCart>Carrinho Vazio</EmptyCart>
+  )
+}
      
     </Container>
   )
