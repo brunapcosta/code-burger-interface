@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
+import PropTypes from 'prop-types'
+
 import ProductsLogo from '../../assets/products-logo.png'
 import {CardProduct} from '../../Components'
 import api from '../../services/api'
@@ -70,4 +72,8 @@ export function Products() {
       </ProductsContainer>
     </Container>
   )
+}
+
+Products.propTypes = {
+  location: PropTypes.object
 }

@@ -1,4 +1,5 @@
 import React from 'react'
+// import { useNavigate } from 'react-router-dom'
 
 import PropTypes from 'prop-types'
 
@@ -14,7 +15,8 @@ export function CardProduct({product}) {
         <div>
         <ProductName>{product.name}</ProductName>
         <ProductPrice>{product.formatedPrice}</ProductPrice>
-        <Button onClick={() => putProductInCart(product)}>Adicionar</Button>
+        <Button onClick={() => putProductInCart(product)}
+        >Adicionar</Button>
         </div>
         </Container>
         )

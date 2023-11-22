@@ -12,18 +12,23 @@ export const Container = styled.div`
 `
 
 export const LoginImage = styled.img`
-    height: 90%;
-    width: 40%;
+    height: 80%;
+    width: 30%;
+    border-radius: 10px 0px 0px 10px;
 `
 
 export const ContainerItems = styled.div`
+    height: 80%;
     background: #373737;
     border-radius: 0px 10px 10px 0px;
-    height: 90%;
     padding: 25px 55px;
     display: flex;
     flex-direction: column;
     justify-content: center;
+
+    img{
+        margin-top: 20px;
+    }
 
     form{
         display: flex;
@@ -37,7 +42,7 @@ export const ContainerItems = styled.div`
         line-height: 28px;
         color: #FFFFFF;
         text-align: center;
-        margin-top: 100px;
+        margin-top: 70px;
     }
 `
 

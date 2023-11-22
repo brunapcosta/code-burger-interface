@@ -82,7 +82,7 @@ export function Login() {
             error={errors.password?.message} />
           <ErrorMessage>{errors.password?.message}</ErrorMessage>
 
-          <Button type="submit" to="/" style={{ marginTop: 80, marginBottom: 25 }} >Entrar</Button>
+          <Button type="submit" to="/" style={{ marginTop: 70, marginBottom: 25 }} >Entrar</Button>
         </form>
 
         <SingInLink>

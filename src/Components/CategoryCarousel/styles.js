@@ -62,4 +62,9 @@ export const Button = styled.button`
     &:active{
         opacity: 0.6;
     }
+
+    /* text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center; */
 `

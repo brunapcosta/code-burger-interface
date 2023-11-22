@@ -1,16 +1,23 @@
 import React from 'react'
 import { Outlet, Navigate } from 'react-router-dom'
 
-// import PropTypes from 'prop-types'
+// Outlet
+import PropTypes from 'prop-types'
 
-const PrivateRoutes = () => {
+// import { Header } from '../Components/Header'
+// { component, ...rest }
+
+const PrivateRoute = () => {
     const auth = localStorage.getItem('codeburger:userData')
+    
     return (
-        auth ? <Outlet to='/' /> : <Navigate to='/login' />)
+        auth ? < Outlet to='/' /> : <Navigate to='/login' /> 
+    )
+    }
+
+
+export default PrivateRoute
+
+PrivateRoute.propTypes = {
+    component: PropTypes.oneOfType([PropTypes.func, PropTypes.element])
 }
-
-export default PrivateRoutes
-
-// PrivateRoute.propTypes = {
-//     component: PropTypes.oneOfType([PropTypes.func, PropTypes.element])
-// }
