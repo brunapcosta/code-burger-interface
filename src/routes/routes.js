@@ -1,7 +1,7 @@
 import React from 'react'
 import { Routes, Route, BrowserRouter as Router } from 'react-router-dom'
 
-import {Home, Login, Products, Register, Cart} from '../containers'
+import {Home, Login, Products, Register, Cart, Admin} from '../containers'
 import PrivateRoutes from  './privateRoute'
 
 function Routtes() {
@@ -15,6 +15,8 @@ function Routtes() {
                     <Route path='/' exact Component={Home} />
                     <Route path='/produtos' Component={Products} />
                     <Route path='/carrinho' Component={Cart} />
+
+                    <Route path='/pedidos' Component={Admin} isAdmin={ true } />
                     </Route>
                 </Routes>
         </Router>

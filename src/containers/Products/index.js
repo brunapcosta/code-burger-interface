@@ -14,7 +14,13 @@ import {
   ProductsContainer
 } from './styles'
 
-export function Products() {
+export function Products(props) {
+
+  console.log(props)
+  // let categoryId = 0
+  // if(state?.categoryId) {
+  //   categoryId = state.categoryId
+  // }
   const [categories, setCategories] = useState([])
   const [products, setProducts] = useState([])
   const [filterProducts, setFilterProducts] = useState([])
