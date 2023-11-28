@@ -5,23 +5,20 @@ import PropTypes from 'prop-types'
 
 import { Header } from '../Components/Header'
 
-const PrivateRoute = ({ isAdmin }) => {
+const PrivateRoute = ({ isAdmin, ...rest }) => {
     const auth = localStorage.getItem('codeburger:userData')
-
-    if(!auth){
-        return <Navigate to='/login' />
-    }
 
     if(isAdmin && !JSON.parse(auth).admin){
         return <Navigate to='/' />
-    } else{
+    }
         return (
-                    <>
-                        <Header />
-                        < Outlet to='/' /> 
-                    </>
-                )
-        }
+            auth ? 
+            <>
+                {!isAdmin && <Header />}
+                < Outlet to='/' />
+            </>
+            : <Navigate {...rest} to='/login' />
+        )
     }
 
 
