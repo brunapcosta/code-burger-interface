@@ -11,6 +11,9 @@ const PrivateRoute = ({ isAdmin, ...rest }) => {
     if(isAdmin && !JSON.parse(auth).admin){
         return <Navigate to='/' />
     }
+    if(isAdmin && JSON.parse(auth).admin){
+        return <Navigate to='/pedidos' />
+    }
         return (
             auth ? 
             <>
