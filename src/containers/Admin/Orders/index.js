@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from 'react'
 
-import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import Box from '@mui/material/Box';
-import Collapse from '@mui/material/Collapse';
-import IconButton from '@mui/material/IconButton';
-import Paper from '@mui/material/Paper';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Typography from '@mui/material/Typography';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown'
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
+import Box from '@mui/material/Box'
+import Collapse from '@mui/material/Collapse'
+import IconButton from '@mui/material/IconButton'
+import Paper from '@mui/material/Paper'
+import Table from '@mui/material/Table'
+import TableBody from '@mui/material/TableBody'
+import TableCell from '@mui/material/TableCell'
+import TableContainer from '@mui/material/TableContainer'
+import TableHead from '@mui/material/TableHead'
+import TableRow from '@mui/material/TableRow'
+import Typography from '@mui/material/Typography'
 
 import api from '../../../services/api'
+import Row from './row'
 import { Container } from './styles'
 
 function Orders() {
@@ -49,7 +50,24 @@ function Orders() {
 
     return (
         <Container>
-            <h1>Pedidos</h1>
+                <TableContainer component={Paper}>
+      <Table aria-label="collapsible table">
+        <TableHead>
+          <TableRow>
+            <TableCell />
+            <TableCell>Cliente</TableCell>
+            <TableCell>Pedido</TableCell>
+            <TableCell>Data do Pedido</TableCell>
+            <TableCell>Status</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {rows.map(row => (
+            <Row key={row.id} row={row} />
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
         </Container>
     )
 }

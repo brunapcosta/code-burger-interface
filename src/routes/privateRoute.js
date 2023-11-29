@@ -1,26 +1,26 @@
+
 import React from 'react'
 import { Outlet, Navigate } from 'react-router-dom'
 
 import PropTypes from 'prop-types'
 
-import { Header } from '../Components/Header'
+import { Header } from '../Components'
 
-const PrivateRoute = ({ isAdmin, ...rest }) => {
-    const auth = localStorage.getItem('codeburger:userData')
+const PrivateRoute = ({ component, isAdmin, ...rest }) => {
+    const user = localStorage.getItem('codeburger:userData')
 
-    if(isAdmin && !JSON.parse(auth).admin){
+    if (!user) {
+        return <Navigate to="/login" />
+      }
+
+    if(isAdmin && !JSON.parse(user).admin){
         return <Navigate to='/' />
     }
-    if(isAdmin && JSON.parse(auth).admin){
-        return <Navigate to='/pedidos' />
-    }
         return (
-            auth ? 
             <>
                 {!isAdmin && <Header />}
-                < Outlet to='/' />
+                <Outlet {...rest} element={component} />
             </>
-            : <Navigate {...rest} to='/login' />
         )
     }
 

@@ -8,19 +8,17 @@ function Routtes() {
 
     return (
         <Router>
-                <Routes>
-                    <Route path='/login' exact Component={Login} />
-                    <Route path='/register' exact Component={Register} />
-                    <Route element={<PrivateRoutes/>}>
-                    <Route path='/' exact Component={Home} />
-                    <Route path='/produtos' Component={Products} />
-                    <Route path='/carrinho' Component={Cart} />
-
-                    <Route path='/pedidos' Component={Admin} isAdmin={ true } />
-                    </Route>
-                </Routes>
+            <Routes>
+                <Route element={<Login />} path="/login" />
+                <Route element={<Register />} path="/cadastro" />
+        
+                <Route element={<PrivateRoutes />} />
+                <Route element={<Home />} path="/" exact />
+                <Route element={<Products />} path="/produtos" />
+                <Route element={<Cart />} path="/carrinho" />
+                <Route element={<Admin />} path="/pedidos" isAdmin />
+            </Routes>
         </Router>
     )
-
 }
 export default Routtes
