@@ -6,11 +6,11 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp'
 import Box from '@mui/material/Box'
 import Collapse from '@mui/material/Collapse'
 import IconButton from '@mui/material/IconButton'
-import Paper from '@mui/material/Paper'
+// import Paper from '@mui/material/Paper'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
-import TableContainer from '@mui/material/TableContainer'
+// import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Typography from '@mui/material/Typography'
@@ -34,12 +34,11 @@ function Row({ row }) {
             </IconButton>
           </TableCell>
           <TableCell component="th" scope="row">
-            {row.orderId}
+            {row.name}
           </TableCell>
-          <TableCell></TableCell>
-          <TableCell>{row.name}</TableCell>
-          <TableCell>{row.status}</TableCell>
+          <TableCell>{row.orderId}</TableCell>
           <TableCell>{row.date}</TableCell>
+          <TableCell>{row.status}</TableCell>
         </TableRow>
         <TableRow>
           <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -51,22 +50,22 @@ function Row({ row }) {
                 <Table size="small" aria-label="purchases">
                   <TableHead>
                     <TableRow>
-                      <TableCell></TableCell>
                       <TableCell>Quantidade</TableCell>
                       <TableCell>Produto</TableCell>
                       <TableCell>Categoria</TableCell>
+                      <TableCell></TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
                     {row.products.map((productRow) => (
                       <TableRow key={productRow.id}>
-                        <TableCell component="th" scope="row">
-                          {productRow.date}
+                        <TableCell component="th" scope="row" >
+                          {productRow.quantity}
                         </TableCell>
-                        <TableCell>{productRow.customerId}</TableCell>
-                        <TableCell>{productRow.amount}</TableCell>
+                        <TableCell>{productRow.name}</TableCell>
+                        <TableCell>{productRow.category}</TableCell>
                         <TableCell>
-                          <img src={productRow.url} alt='imagem-do-produto' />
+                          <img src={productRow.url} style={{ width: 120, height: 120 }} alt='imagem-do-produto' />
                         </TableCell>
                       </TableRow>
                     ))}

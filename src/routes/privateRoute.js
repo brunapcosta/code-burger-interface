@@ -1,4 +1,3 @@
-
 import React from 'react'
 import { Outlet, Navigate } from 'react-router-dom'
 
@@ -9,19 +8,21 @@ import { Header } from '../Components'
 const PrivateRoute = ({ component, isAdmin, ...rest }) => {
     const user = localStorage.getItem('codeburger:userData')
 
-    if (!user) {
-        return <Navigate to="/login" />
-      }
+    if(!user){
+        return <Navigate to='/login' />
+    } 
 
-    if(isAdmin && !JSON.parse(user).admin){
+    if(isAdmin && !JSON.parse(user).admin ){
         return <Navigate to='/' />
     }
-        return (
+        
+    return ( 
             <>
                 {!isAdmin && <Header />}
                 <Outlet {...rest} element={component} />
             </>
-        )
+
+    )
     }
 
 
