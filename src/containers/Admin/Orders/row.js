@@ -24,7 +24,7 @@ function Row({ row, setOrders, orders }) {
     async function setNewStatus(id, status) {
       setIsLoading(true)
       try{
-        await api.put(`orders/${id}`, {status})
+        await api.put(`orders/${id}`, { status })
 
         const newOrders = orders.map(order => {
           return order._id === id ? { ...order, status } : order
@@ -33,7 +33,7 @@ function Row({ row, setOrders, orders }) {
       } catch (err){
           console.error(err)
       } finally {
-        setIsLoading(false)
+          setIsLoading(false)
       }
     }
   

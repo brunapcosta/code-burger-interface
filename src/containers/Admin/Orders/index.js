@@ -16,9 +16,11 @@ import { Container, Menu, LinkMenu } from './styles'
 
 function Orders() {
     const [orders, setOrders] = useState([])
-    const [rows, setRows] = useState([])
-    const [activeStatus, setActiveStatus] = useState(1)
     const [filteredOrders, setFilteredOrders] = useState([])
+    const [activeStatus, setActiveStatus] = useState(1)
+    const [rows, setRows] = useState([])
+  
+    console.log(orders)
 
     useEffect(() => {
         async function loadOrders() {
@@ -27,6 +29,7 @@ function Orders() {
             setOrders(data)
             setFilteredOrders(data)
         }
+
         loadOrders()
     }, [])
 
@@ -46,15 +49,19 @@ function Orders() {
     }, [filteredOrders])
 
     useEffect(() => {
-      const statusIndex = status.findIndex(sts => sts.id === activeStatus)
-      const newFilteredOrders = orders.filter(
-        order => order.status === status[statusIndex].value
-      )
-      setFilteredOrders(newFilteredOrders)
-    }, [orders])
-
+      if (activeStatus === 1) {
+        setFilteredOrders(orders)
+      } else {
+        const statusIndex = status.findIndex(sts => sts.id === activeStatus)
+        const newFilteredOrders = orders.filter(
+          order => order.status === status[statusIndex].value
+        )
+        setFilteredOrders(newFilteredOrders)
+      }
+    }, [activeStatus, orders])
+    
     function handleStatus(status) {
-      if(status.id ===1){
+      if(status.id === 1){
         setFilteredOrders(orders)
       } else {
         const newOrders = orders.filter(order => order.status === status.value)
