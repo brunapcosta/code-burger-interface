@@ -19,37 +19,12 @@ function Routtes() {
           <Route element={<Cart />} path="/carrinho" />
         </Route>
 
-        <Route element={<PrivateRoutes isAdmin />}>
+        <Route element={<PrivateRoutes isAdmin />} >
           <Route element={<Admin />} path={paths.Order} />
-          {/* <Route element={<Admin />} path={paths.Products} />
-          <Route element={<Admin />} path={paths.NewProduct} />
-          <Route element={<Admin />} path={paths.EditProduct} /> */}
+          <Route element={<Admin />} path={paths.ListProducts} />
         </Route>
       </Routes>
     </Router>
-        // <Router>
-        //     <Routes>
-        //         <Route path="/login" element={<Login />} />
-        //         <Route path="/register" element={<Register />}  />
-
-        //         <Route exact path="/" element={
-        //             <PrivateRoutes>
-        //                 <Home />
-        //             </PrivateRoutes>} />
-        //         <Route path="/produtos" element={
-        //             <PrivateRoutes>
-        //                 <Products />
-        //             </PrivateRoutes>} />
-        //         <Route path="/carrinho" element={
-        //             <PrivateRoutes>
-        //                 <Cart />
-        //             </PrivateRoutes>} />
-        //         <Route path="/pedidos" isAdmin element={
-        //             <PrivateRoutes>
-        //                 <Admin />
-        //             </PrivateRoutes>} />
-        //     </Routes>
-        // </Router>
     )
 }
 export default Routtes

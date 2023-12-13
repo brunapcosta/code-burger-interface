@@ -24,7 +24,8 @@ export const ItemContainer = styled.div`
     padding-left: 20px;
 
     .icon{
-        color: #ffffff
+        color: #ffffff;
+        margin-right: 5px;
     }
 `
 

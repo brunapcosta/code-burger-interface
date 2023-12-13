@@ -5,5 +5,6 @@ export const Container = styled.div`
     min-height: 100vh;
     width: 100vw;
     background: #efefef;
-    /* justify-content: space-between; */
+    justify-content: flex-start;
 `
+export const ContainerItens = styled.div``
