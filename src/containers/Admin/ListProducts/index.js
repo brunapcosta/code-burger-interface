@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
+import CancelIcon from '@mui/icons-material/Cancel'
+import CheckCircleIcon from '@mui/icons-material/CheckCircle'
 import Paper from '@mui/material/Paper'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
@@ -9,10 +11,11 @@ import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 
 import api from '../../../services/api'
-import { Container, Img } from './styles'
+import formatCurrency from '../../../utils/formatCurrency'
+import { Container, Img, EditIconStyles } from './styles'
 
 function ListProducts(){
-    const [products, setProducts] = useState([])
+    const [products, setProducts] = useState()
 
     useEffect(() => {
         async function loadOrders() {
@@ -22,6 +25,14 @@ function ListProducts(){
         }
         loadOrders()
     }, [])
+
+    function isOffer(offerStatus) {
+        if(offerStatus) {
+           return <CheckCircleIcon style={{ color: '#00FF00' }} />
+        }
+            return <CancelIcon style={{ color: '#CC1717' }}/>
+    }
+
     return(
         <Container>
             <TableContainer component={Paper}>
@@ -29,14 +40,15 @@ function ListProducts(){
                     <TableHead>
                         <TableRow>
                             <TableCell>Nome</TableCell>
-                            <TableCell >Preço</TableCell>
-                            <TableCell >Oferta</TableCell>
-                            <TableCell ></TableCell>
+                            <TableCell align='center'>Preço</TableCell>
+                            <TableCell align='center'>Oferta</TableCell>
+                            <TableCell align='center'>Imagem do Produto</TableCell>
                             <TableCell >Editar</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                    {products.map(product => (
+                    {products && 
+                        products.map(product => (
                         <TableRow
                         key={product.id}
                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -44,13 +56,13 @@ function ListProducts(){
                         <TableCell component="th" scope="row">
                             {product.name}
                         </TableCell>
-                        <TableCell >{product.price}</TableCell>
-                        <TableCell >{product.offer}</TableCell>
-                        <TableCell >
+                        <TableCell align='center'>{formatCurrency(product.price)}</TableCell>
+                        <TableCell align='center'>{isOffer(product.offer)}</TableCell>
+                        <TableCell align='center'>
                             <Img src={product.url} alt='imagem-produto' />
                         </TableCell>
                         <TableCell >
-                            <button>Editar</button>
+                            <EditIconStyles />
                         </TableCell>
                         </TableRow>
                     ))}

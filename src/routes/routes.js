@@ -22,6 +22,7 @@ function Routtes() {
         <Route element={<PrivateRoutes isAdmin />} >
           <Route element={<Admin />} path={paths.Order} />
           <Route element={<Admin />} path={paths.ListProducts} />
+          <Route element={<Admin />} path={paths.NewProduct} />
         </Route>
       </Routes>
     </Router>

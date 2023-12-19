@@ -1,4 +1,5 @@
 import LocalMallIcon from '@mui/icons-material/LocalMall'
+import QueueIcon from '@mui/icons-material/Queue'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 
 import paths from '../../constants/paths'
@@ -15,6 +16,12 @@ const listLinks = [
         label: 'Lista de Produtos',
         link: paths.ListProducts,
         icon: ShoppingCartIcon
+    },
+    {
+        id: 3,
+        label: 'Novo Produto',
+        link: paths.NewProduct,
+        icon: QueueIcon
     }
 ]
 
