@@ -7,7 +7,7 @@ import * as Yup from "yup"
 
 import Logo from '../../assets/logo.png'
 import RegisterImg from '../../assets/register-image.png'
-import {Button} from '../../Components'
+import { Button, ErrorMessage } from '../../Components'
 import apiCodeBurger from '../../services/api'
 import {
   Container,
@@ -15,8 +15,7 @@ import {
   ContainerItems,
   Label,
   Input,
-  SingInLink,
-  ErrorMessage
+  SingInLink
 } from './styles'
 
 export function Register() {

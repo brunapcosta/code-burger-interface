@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useForm, Controller } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 
@@ -11,24 +11,29 @@ import * as Yup from 'yup'
 
 import { ErrorMessage } from '../../../Components'
 import api from '../../../services/api'
-import { Container, Label, Input, ButtonStyle, LabelUpload, ReactSelectStyle } from './styles'
+import { 
+    Container,
+    Label,
+    Input,
+    ButtonStyle,
+    LabelUpload,
+    ReactSelectStyle,
+    ContainerOffer
+} from './styles'
 
-function NewProduct() {
+function EditProduct() {
     const [fileName, setFileName] = useState(null)
     const [categories, setCategories] = useState([])
-    const navigate = useNavigate()
-
+    const { navigate } = useNavigate()
+    const location = useLocation()
+    const {
+            state: { product }
+    } = location
+       
     const schema = Yup.object().shape({
         name: Yup.string().required('Digite o nome'),
         price: Yup.string().required('Digite o preço'),
-        category: Yup.object().required('Escolha uma categoria'),
-        file: Yup.mixed().test('required', 'carregue um arquivo', value => {
-            return value?.length > 0
-        }).test('fileSize', 'Arquivo até 8MB', value => {
-            return value[0]?.size <= 800000
-        }).test('type', 'Arquivo JPEG ou PNG', value =>{
-            return value[0]?.type === 'image/jpeg' || value[0]?.type === 'image/png'
-        })
+        category: Yup.object().required('Escolha uma categoria')
     })
 
     const {
@@ -46,12 +51,14 @@ function NewProduct() {
         productDataFormData.append('name', data.name)
         productDataFormData.append('price', data.price)
         productDataFormData.append('category_id', data.category.id)
-        productDataFormData.append('file', data.file[0])
+        .productDataFormDataappend('file', data.file[0])
+        .productDataFormDataappend('offer', data.offer)
 
-        await toast.promise(api.post('products', productDataFormData), {
-            pedding: 'Criando Produto...',
-            success: 'Produto criado com sucesso',
-            error: 'Falha ao criar produto'
+        await toast.promise(
+            api.put(`products/${product.id}`, productDataFormData), {
+            pedding: 'Editando Produto...',
+            success: 'Produto editado com sucesso',
+            error: 'Falha ao editar produto'
         })
 
         setTimeout(() => {
@@ -73,11 +80,19 @@ return (
     <Container>
        <form noValidate onSubmit={handleSubmit(onSubmit)}>
         <Label>Nome</Label>
-        <Input type='text' {...register('name')}/>
+        <Input
+            type='text'
+            {...register('name')}
+            defaultValue={product.name}
+            />
         <ErrorMessage>{errors.name?.message}</ErrorMessage>
 
         <Label>Preço</Label>
-        <Input type='number' {...register('price')}/>
+        <Input
+            type='number'
+            {...register('price')}
+            defaultValue={product.price}
+            />
         <ErrorMessage>{errors.price?.message}</ErrorMessage>
 
         <LabelUpload>
@@ -103,6 +118,7 @@ return (
         <Controller
             name="category"
             control={control}
+            defaultValue={product.category}
             render={({ field }) => {
                 return (
                     <>
@@ -112,6 +128,7 @@ return (
                         getOptionLabel={cat => cat.name}
                         getOptionValue={cat => cat.id}
                         placeholder='Categoria'
+                        defaultValue={product.category}
                     />
                     <ErrorMessage>{errors.category?.message}</ErrorMessage>
                     </>
@@ -119,10 +136,19 @@ return (
             }}
          ></Controller>
 
-        <ButtonStyle>Adicionar Produto</ButtonStyle>
+         <ContainerOffer>
+            <input
+                type='checkbox'
+                {...register('offer')}
+                defaultChecked={product.offer}
+            />
+            <Label>Em oferta</Label>
+         </ContainerOffer>
+
+        <ButtonStyle>Editar Produto</ButtonStyle>
        </form>
     </Container>
 )
 }
 
-export default NewProduct
+export default EditProduct

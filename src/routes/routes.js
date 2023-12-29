@@ -23,6 +23,7 @@ function Routtes() {
           <Route element={<Admin />} path={paths.Order} />
           <Route element={<Admin />} path={paths.ListProducts} />
           <Route element={<Admin />} path={paths.NewProduct} />
+          <Route element={<Admin />} path={paths.EditProduct} />
         </Route>
       </Routes>
     </Router>

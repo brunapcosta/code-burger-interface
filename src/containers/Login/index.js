@@ -8,7 +8,7 @@ import * as Yup from "yup"
 
 import LoginImg from '../../assets/burguer-porcao-aipim.png'
 import Logo from '../../assets/logo.png'
-import {Button} from '../../Components'
+import { Button, ErrorMessage } from '../../Components'
 import { useUser } from '../../hooks/UserContext'
 import apiCodeBurger from '../../services/api'
 import {
@@ -17,8 +17,7 @@ import {
   ContainerItems,
   Label,
   Input,
-  SingInLink,
-  ErrorMessage,
+  SingInLink
 } from './styles'
 
 export function Login() {
