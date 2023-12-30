@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 
 import ProductsLogo from '../../assets/products-logo.png'
 import {CardProduct} from '../../Components'
@@ -14,17 +15,20 @@ import {
   ProductsContainer
 } from './styles'
 
-export function Products(props) {
+export function Products() {
 
-  console.log(props)
-  // let categoryId = 0
-  // if(state?.categoryId) {
-  //   categoryId = state.categoryId
-  // }
   const [categories, setCategories] = useState([])
   const [products, setProducts] = useState([])
   const [filterProducts, setFilterProducts] = useState([])
   const [activeCategory, setActiveCategory] = useState(0)
+
+  const { state } = useLocation()
+
+  useEffect(() => {
+    if(state?.categoryId) {
+        setActiveCategory(state.categoryId)
+      }
+  }, [state?.categoryId])
 
     useEffect(() => {
         async function loadCategories() {
@@ -44,15 +48,16 @@ export function Products(props) {
           setProducts(newProduct)
       }
 
-      loadCategories()
       loadProducts()
+      loadCategories()
     }, [])
 
     useEffect(() => {
       if(activeCategory === 0){
         setFilterProducts(products)
       } else{
-      const newFilteredProducts = products.filter(product => product.category_id === activeCategory)
+      const newFilteredProducts = products.filter(
+        product => product.category_id === activeCategory)
 
       setFilterProducts(newFilteredProducts)
       }
@@ -80,6 +85,6 @@ export function Products(props) {
   )
 }
 
-Products.propTypes = {
-  location: PropTypes.object
-}
+// Products.propTypes = {
+//   location: PropTypes.object
+// }

@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import Carousel from 'react-elastic-carousel'
-// import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import Offers from '../../assets/offers.png'
 import { useCart } from '../../hooks/cartContext'
@@ -17,7 +17,7 @@ import {
 export function OffersCarousel() {
     const [offers, setOffers] = useState([])
     const { putProductInCart } = useCart()
-    // const { push } = useNavigate()
+    const navigate = useNavigate()
 
     useEffect(() => {
         async function loadOffers() {
@@ -57,7 +57,10 @@ export function OffersCarousel() {
                         <p>{product.name}</p>
                         <p>{product.formatedPrice}</p>
                         <Button 
-                        onClick={() => putProductInCart(product)}
+                        onClick={() => {
+                          putProductInCart(product)
+                          navigate('/carrinho')
+                        }}
                         >Peça agora</Button>
                     </ConteinerItens>
                 ))
