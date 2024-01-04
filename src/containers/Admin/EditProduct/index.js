@@ -24,7 +24,7 @@ import {
 function EditProduct() {
     const [fileName, setFileName] = useState(null)
     const [categories, setCategories] = useState([])
-    const { navigate } = useNavigate()
+    const navigate = useNavigate()
     const location = useLocation()
     const {
             state: { product }
@@ -51,15 +51,17 @@ function EditProduct() {
         productDataFormData.append('name', data.name)
         productDataFormData.append('price', data.price)
         productDataFormData.append('category_id', data.category.id)
-        .productDataFormDataappend('file', data.file[0])
-        .productDataFormDataappend('offer', data.offer)
+        productDataFormData.append('file', data.file[0])
+        productDataFormData.append('offer', data.offer)
 
         await toast.promise(
-            api.put(`products/${product.id}`, productDataFormData), {
+            api.put(`products/${product.id}`, productDataFormData), 
+            {
             pedding: 'Editando Produto...',
             success: 'Produto editado com sucesso',
             error: 'Falha ao editar produto'
-        })
+            }
+        )
 
         setTimeout(() => {
             navigate('/listar-produtos')
