@@ -59,7 +59,7 @@ export function OffersCarousel() {
                         <Button 
                         onClick={() => {
                           putProductInCart(product)
-                          navigate('/carrinho')
+                          // navigate('/carrinho')
                         }}
                         >Peça agora</Button>
                     </ConteinerItens>

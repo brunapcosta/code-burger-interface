@@ -24,8 +24,8 @@ function NewProduct() {
         category: Yup.object().required('Escolha uma categoria'),
         file: Yup.mixed().test('required', 'carregue um arquivo', value => {
             return value?.length > 0
-        }).test('fileSize', 'Arquivo até 8MB', value => {
-            return value[0]?.size <= 800000
+        }).test('fileSize', 'Arquivo até 4MB', value => {
+            return value[0]?.size <= 4000000
         }).test('type', 'Arquivo JPEG ou PNG', value =>{
             return value[0]?.type === 'image/jpeg' || value[0]?.type === 'image/png'
         })

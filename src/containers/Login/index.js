@@ -90,7 +90,7 @@ export function Login() {
 
         <SingInLink>
           Não tem conta?{' '}
-          <Link style={{ color: 'white' }} to="/register" >
+          <Link style={{ color: 'white' }} to="/cadastro" >
             Cadastre-se
           </Link>
         </SingInLink>

@@ -1,7 +1,8 @@
 import axios from 'axios'
 
 const apiCodeBurger = axios.create({
-    baseURL: 'http://localhost:3001'
+    baseURL: 'https://code-burger-e6bbd6.netlify.app/'
+    // baseURL: 'http://localhost:3001'
 })
 
 apiCodeBurger.interceptors.request.use( async config => {
