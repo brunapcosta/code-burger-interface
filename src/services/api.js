@@ -3,6 +3,9 @@ import axios from 'axios'
 const apiCodeBurger = axios.create({
     baseURL: 'https://code-burger-e6bbd6.netlify.app',
     withCredentials: true,
+    headers: {
+        "Access-Control-Allow-Origin" : "*",
+    }
     // baseURL: 'http://localhost:3001'
 })
 
