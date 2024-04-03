@@ -2,10 +2,12 @@ import axios from 'axios'
 
 const apiCodeBurger = axios.create({
     baseURL: 'https://code-burger-e6bbd6.netlify.app',
-    withCredentials: false,
-    // headers: {
-    //     "Access-Control-Allow-Origin" : "*",
-    // }
+    headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*', 
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
+    },
     // baseURL: 'http://localhost:3001'
 })
 
@@ -13,7 +15,6 @@ apiCodeBurger.interceptors.request.use( async config => {
     const userData = await localStorage.getItem('codeburger:userData')
     const token = userData && JSON.parse(userData).token
     config.headers.authorization = `Bearer ${token}`
-    config.headers["Access-Control-Allow-Origin"] = "*"
     return config
 })
 
