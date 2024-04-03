@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const apiCodeBurger = axios.create({
-    baseURL: 'https://code-burger-e6bbd6.netlify.app',
+    baseURL: 'https://burger-good.netlify.app/',
     headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*', 
