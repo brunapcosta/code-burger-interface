@@ -2,12 +2,12 @@ import axios from 'axios'
 
 const apiCodeBurger = axios.create({
     baseURL: 'https://burger-good-ea18.up.railway.app/',
-    headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*', 
-        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH',
-        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
-    },
+    // headers: {
+    //     'Content-Type': 'application/json',
+    //     'Access-Control-Allow-Origin': '*', 
+    //     'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS, PATCH',
+    //     'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
+    // },
     // baseURL: 'http://localhost:3001'
 })
 
