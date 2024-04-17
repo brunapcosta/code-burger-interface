@@ -132,7 +132,6 @@ return (
             <input
                 type='checkbox'
                 {...register('offer')}
-                defaultChecked={product.offer}
             />
             <Label>Em oferta</Label>
          </ContainerOffer>
