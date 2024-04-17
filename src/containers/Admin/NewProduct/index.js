@@ -47,6 +47,7 @@ function NewProduct() {
         productDataFormData.append('price', data.price)
         productDataFormData.append('category_id', data.category.id)
         productDataFormData.append('file', data.file[0])
+        productDataFormData.append('offer', data.offer)
 
         await toast.promise(api.post('products', productDataFormData), {
             pedding: 'Criando Produto...',
