@@ -11,7 +11,15 @@ import * as Yup from 'yup'
 
 import { ErrorMessage } from '../../../Components'
 import api from '../../../services/api'
-import { Container, Label, Input, ButtonStyle, LabelUpload, ReactSelectStyle, ContainerOffer } from './styles'
+import { 
+    Container,
+    Label,
+    Input,
+    ButtonStyle,
+    LabelUpload,
+    ReactSelectStyle,
+    ContainerOffer
+} from './styles'
 
 function NewProduct() {
     const [fileName, setFileName] = useState(null)

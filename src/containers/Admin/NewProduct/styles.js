@@ -72,5 +72,4 @@ export const ContainerOffer = styled.div`
         height: 15px;
         cursor: pointer;
     }
-
 `
