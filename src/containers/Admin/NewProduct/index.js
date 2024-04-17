@@ -120,6 +120,15 @@ return (
             }}
          ></Controller>
 
+         <ContainerOffer>
+            <input
+                type='checkbox'
+                {...register('offer')}
+                defaultChecked={product.offer}
+            />
+            <Label>Em oferta</Label>
+         </ContainerOffer>
+
         <ButtonStyle>Adicionar Produto</ButtonStyle>
        </form>
     </Container>
