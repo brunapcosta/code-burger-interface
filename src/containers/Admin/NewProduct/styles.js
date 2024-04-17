@@ -61,3 +61,16 @@ export const LabelUpload = styled.label`
 export const ReactSelectStyle = styled(ReactSelect)`
     margin-top: 25px;
 `
+
+export const ContainerOffer = styled.div`
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+
+    input{
+        width: 15px;
+        height: 15px;
+        cursor: pointer;
+    }
+
+`
